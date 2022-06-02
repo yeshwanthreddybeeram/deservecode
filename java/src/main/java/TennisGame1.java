@@ -65,8 +65,10 @@ public class TennisGame1 implements TennisGame
 			{
 				return "Advantage "+player2Name;
 			}
-
-			return "Advantage "+player1Name;
+			if ((player1Score - player2Score) == 1)
+			{
+		     	return "Advantage "+player1Name;
+			}
 		}
 		return null;
 	}
