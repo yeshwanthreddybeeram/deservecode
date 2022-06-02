@@ -35,12 +35,16 @@ public class TennisGame1 implements TennisGame
             score = equalScoresCheck(player1Score);
         }
         else if (player1Score>=4 || player2Score>=4)
-        {
-            int minusResult = player1Score-player2Score;
-            if (minusResult==1) score ="Advantage player1";
-            else if (minusResult ==-1) score ="Advantage player2";
-            else if (minusResult>=2) score = "Win for player1";
-            else score ="Win for player2";
+        {  
+             if(getAdvantagePlayer(player1Name, player2Name) != null)
+             {
+            	 score = getAdvantagePlayer(player1Name, player2Name);
+             }
+             else if(getWinPlayer(player1Name, player2Name) != null)
+             {
+            	 score = getWinPlayer(player1Name, player2Name);
+             }
+
         }
         else
         {
@@ -50,6 +54,37 @@ public class TennisGame1 implements TennisGame
         return score;
     }
     
+    
+	public String getAdvantagePlayer(String player1Name, String player2Name)
+	{
+		int player1Score = playersScore.get(player1Name);
+		int player2Score = playersScore.get(player2Name);
+		if (player1Score >= 4 || player2Score >= 4)
+		{
+			if ((player2Score - player1Score) == 1)
+			{
+				return "Advantage "+player2Name;
+			}
+
+			return "Advantage "+player1Name;
+		}
+		return null;
+	}
+	
+    public String getWinPlayer(String player1Name, String player2Name)
+    {
+    	int player1Score = playersScore.get(player1Name);
+		int player2Score = playersScore.get(player2Name);
+		if (player1Score >= 4 || player2Score >= 4)
+		{
+			if ((player2Score - player1Score) >= 2)
+			{
+				return "Win for "+player2Name;
+			}
+			return "Win for "+player1Name;
+		}
+		return null;
+    }
     
 	public String getScore(String playerName)
 	{
@@ -61,16 +96,16 @@ public class TennisGame1 implements TennisGame
 		switch (tempScore)
 		{
 		case 0:
-			score += "Love";
+			score = "Love";
 			break;
 		case 1:
-			score += "Fifteen";
+			score = "Fifteen";
 			break;
 		case 2:
-			score += "Thirty";
+			score = "Thirty";
 			break;
 		case 3:
-			score += "Forty";
+			score = "Forty";
 			break;
 		}
 
